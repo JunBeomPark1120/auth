@@ -11,12 +11,21 @@
         <p class="card-text">{{article.content}}</p>
         <p class="card-text">{{article.user}}</p>
     </div>
+
+    {% if request.user.is_authenticated%}
     <div class="card-footer">
         <form action="{% url 'articles:comment_create' article_id=article.id %}" method="POST">
             {% csrf_token %}
             {% bootstrap_form form %}
             <input type='submit'>
         </form>
+    </div>
+    {% endif%}
+    
+    <div class="card-footer">
+        {% for comment in article.content_set.all%}
+            <p>{{comment.user}} : {{comment.content}}</p>
+        {% endfor %}
     </div>
 </div>
 {% endfor %}
