@@ -24,7 +24,8 @@ def login(request):
         form = CustomAuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('accounts:login')
+            next_url = request.GET.get('next') # => /articles/create/
+            return redirect(next_url or 'articles:login')
         
     else:
         form = CustomAuthenticationForm()
