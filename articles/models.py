@@ -24,7 +24,7 @@ class Article(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    # article_id = 창고가 자동으로 추가해주는 칼럼
+    # article_id = 장고가 자동으로 추가해주는 칼럼
     
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     # user_id = 
