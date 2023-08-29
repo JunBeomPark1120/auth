@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap5 %}
+
 {% block body %}
 
 {% for article in articles %}
@@ -8,6 +10,13 @@
         <h5 class="card-title">{{article.title}}</h5>
         <p class="card-text">{{article.content}}</p>
         <p class="card-text">{{article.user}}</p>
+    </div>
+    <div class="card-footer">
+        <form action="{% url 'articles:comment_create' article_id=article.id %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type='submit'>
+        </form>
     </div>
 </div>
 {% endfor %}
